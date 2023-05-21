@@ -85,19 +85,54 @@ class linkedList{
         newString += ` null`
         return newString;
     }
+    removeAt(index){
+        if(index < 0 || index>= this.length){
+            return null;
+        }
+        if(index == 0){
+            let current = this.head;
+            this.head = current.next;
+            current = null;
+            this.length--;
+        }else{
+            let current = this.head;
+            for(let i = 0; i< index - 1; i++){
+                current = current.next;
+            }
+            const temp = current.next;
+            current.next = null;
+            current.next = temp.next
+            this.length --;
+        }
+    }
+    insertAt(value, index){
+        let current = this.head;
+        for(let i = 0; i < index - 1; i++){
+            current = current.next;
+        }
+        let tempLeft = current;
+        let tempRight = current.next;
+        const newNode = new node(value, tempRight);
+        tempLeft.next = newNode;
+        this.length++;
+    }
 }
 
 const ll = new linkedList();
-ll.prependNode(5);
-ll.prependNode(6);
-ll.prependNode(8);
 ll.prependNode(4);
+ll.prependNode(3);
+ll.prependNode(2);
+ll.prependNode(1);
 ll.appendNode(100);
+ll.insertAt(500, 2);
+//ll.removeAt(0);
 //ll.removeLast();
 //ll.contains(8)
 //ll.find(6);
-//console.log(ll.toString());
 console.log(ll)
+
+
+//console.log(ll.toString());
 //console.log(ll.size());
 //console.log(ll.firstNode());
 //console.log(ll.firstNode());
